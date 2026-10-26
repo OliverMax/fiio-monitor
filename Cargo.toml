@@ -1,0 +1,24 @@
+[package]
+name = "fiio-monitor"
+version = "0.1.0"
+license = "GPL-3.0-or-later"
+edition = "2021"
+default-run = "fiio-monitor"
+
+[features]
+ui = ["dep:eframe", "dep:rfd"]
+
+[[bin]]
+name = "fiio-monitor-ui"
+path = "src/bin/ui.rs"
+required-features = ["ui"]
+
+[dependencies]
+cpal = "=0.15.3"
+ringbuf = "=0.3.3"
+hound = "=3.5.1"
+rfd = { version = "=0.15.4", optional = true, default-features = false }
+eframe = { version = "=0.31.1", optional = true, default-features = false, features = ["default_fonts", "glow"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+coreaudio-rs = "=0.11.3"
